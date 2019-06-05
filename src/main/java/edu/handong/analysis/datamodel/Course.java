@@ -18,7 +18,7 @@ public class Course {
 
 		ArrayList<String> infoStudent = new ArrayList<String>();
 
-		String[] splitTrimInfo = line.trim().split(", ");
+		String[] splitTrimInfo = line.trim().split(",");
 
 		for (String ele : splitTrimInfo) {
 			infoStudent.add(ele);
@@ -34,14 +34,30 @@ public class Course {
 		yearTaken = Integer.parseInt(infoStudent.get(7));
 		semesterCourseTaken = Integer.parseInt(infoStudent.get(8));
 	}
+	public String getStudentId() {
+		
+		return studentId;
+		
+	}
 
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
 	public int getYearTaken() {
 		return yearTaken;
 
+	}
+	public String getYearAndSemesterTaken() {
+		String yearAndSemester = String.valueOf(yearTaken)+"-"+String.valueOf(semesterCourseTaken);
+		return yearAndSemester;
 	}
 
 	public int getSemesterCourseTaken() {
 		return semesterCourseTaken;
 	}
-}
 	
+	
+}

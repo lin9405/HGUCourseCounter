@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 public class Student {
 	private String studentId;
-	private ArrayList<Course> coursesTaken; 
-	private HashMap<String, Integer> semestersByYearAndSemester; 
+	private ArrayList<Course> coursesTaken;
+	private HashMap<String, Integer> semestersByYearAndSemester;
 
 	public Student(String studentld) {
 		studentId = studentld;
@@ -18,21 +18,24 @@ public class Student {
 		coursesTaken.add(newRecord);
 	}
 
+
+	
+	
 	
 	public HashMap<String, Integer> getSemestersByYearAndSemester() {
-	int year, semester, coursenumOfSemester; 
-	int tempCoursenum;
+		int year, semester, coursenumOfSemester;
+		int tempCoursenum;
 		String yearAndSemester;
-		
+
 		coursenumOfSemester = coursesTaken.size();
-		
+
 		ArrayList<Course> cloneCourses = (ArrayList<Course>) coursesTaken.clone();
-		
+
 		Course selectedCourse = cloneCourses.get(coursenumOfSemester - 1);
 		year = selectedCourse.getYearTaken();
 		semester = selectedCourse.getSemesterCourseTaken();
 		yearAndSemester = String.valueOf(year) + "-" + String.valueOf(semester);
-		
+
 		if (!semestersByYearAndSemester.containsKey(yearAndSemester)) {
 			tempCoursenum = semestersByYearAndSemester.size();
 			semestersByYearAndSemester.put(yearAndSemester, tempCoursenum + 1);
@@ -42,7 +45,7 @@ public class Student {
 	}
 
 	public int getNumCourseInNthSementer(int semester) {
-		
+
 		int year, semesterCourse, NumCourseInNthSementer = 0;
 		String yearToSemester;
 
@@ -56,6 +59,42 @@ public class Student {
 		}
 		return NumCourseInNthSementer;
 	}
+
+	public boolean getTotalStudentOfyearAndSemester(String yearAndSemester) {
+		for (Course course : coursesTaken) {
+			if (course.getYearAndSemesterTaken().equals(yearAndSemester))
+				return true;
+		}
+		return false;
+	}
+
+	
+	
+	public boolean getStudentTakeSameCourse(String yearAndSemester, String courseCode) {
+
+		for (Course course : coursesTaken) {
+			if (yearAndSemester.equals(course.getYearAndSemesterTaken())) {
+				if (courseCode.equals(course.getCourseCode())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	
+	public String getCourseName(String courseCode)
+
+	{
+		String courseName = null;
+
+		for (Course course : coursesTaken) {
+			if (course.getCourseCode().equals(courseCode)) {
+				courseName = course.getCourseName();
+			//	System.out.println("%%%%%" + courseName);
+			} 
+		}
+		return courseName;
+	}
+
 }
-
-
